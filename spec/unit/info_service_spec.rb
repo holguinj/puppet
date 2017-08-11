@@ -25,8 +25,8 @@ describe "Puppet::InfoService" do
         end
       end
 
-      it "should throw EnvironmentNotFound if given a nonexistent environment" do
-        expect{ Puppet::InfoService.tasks_per_environment('utopia') }.to raise_error(Puppet::Environments::EnvironmentNotFound)
+      it "should return the empty list if given a nonexistent environment" do
+        expect(Puppet::InfoService.tasks_per_environment('utopia')).to eq([])
       end
     end
 
@@ -52,8 +52,8 @@ describe "Puppet::InfoService" do
         end
       end
 
-      it "should throw EnvironmentNotFound if given a nonexistent environment" do
-        expect{ Puppet::InfoService.task_data('utopia', mod_name, task_name) }.to raise_error(Puppet::Environments::EnvironmentNotFound)
+      it "should return the empty task if given a nonexistent environment" do
+        expect(Puppet::InfoService.task_data('utopia', mod_name, task_name)).to eq({:metadata_file => nil, :files => nil})
       end
 
       it "should return an empty task if the module does not exist" do
